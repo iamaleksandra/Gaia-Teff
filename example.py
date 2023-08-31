@@ -8,7 +8,7 @@ Gaia.MAIN_GAIA_TABLE = "gaiadr3.gaia_source"
 
 def corr_bprp_excess(bprp, bprp_excs):
     """
-    calculate the C* value as defined in Riello et.al.2022
+    calculate the C* value as defined in Riello M., et al., 2021
     bprp is bp_rp of Gaia DR3
     bprp_excs is phot_bp_rp_excess_factor of Gaia DR3
     """
