@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-
 import pickle as pk
 import numpy as np
 from astroquery.gaia import Gaia
 
 Gaia.MAIN_GAIA_TABLE = "gaiadr3.gaia_source"
-
 
 def corr_bprp_excess(bprp, bprp_excs):
     """
@@ -23,11 +21,9 @@ def corr_bprp_excess(bprp, bprp_excs):
     return bprp_excs-corr    
 
 #load XGBoost-250 model
-
 xgb_250 = pk.load(open("models\gaia_teff_xgb250.pkl", "rb"))
 
 #load data from Gaia DR3
-
 query = Gaia.launch_job_async("SELECT * \
         FROM gaiadr3.gaia_source AS g, gaiadr3.astrophysical_parameters AS ap \
         WHERE g.source_id = ap.source_id \
@@ -39,7 +35,6 @@ data_gaia = query.get_results()
 data_gaia['C*'] = [corr_bprp_excess(a, b) for a,b in data_gaia['bp_rp', 'phot_bp_rp_excess_factor']]
 
 #define columns needed for model
-
 columns = ['ra', 'dec', 'l', 'b', 'parallax','parallax_error', 'pm',
  'pmra', 'pmdec', 'ruwe', 
  'ipd_frac_multi_peak',
